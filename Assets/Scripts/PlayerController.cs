@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public float jumpStartingSpeed = 0.03f;
-    public float jumpMaxSpeed = 0.1f;
-    public float jumpAccel = 0.45f;
+    public float jumpStartingSpeed = 20f;
+    public float jumpMaxSpeed = 35f;
+    public float jumpAccel = 60f;
 
     public bool isJumping = false;
     public bool accelJump = false;
 
-    public float runSpeed = 20f;
+    public float runSpeed = 15f;
     public float modifiedRunSpeed;
 
     public float maxHealth = 100f;
     public float modifiedmaxHealth;
     public float currentHealth = 100f;
-    public float gravity = 3f;
+    public float gravity = 30f;
 
     public float currentJumpSpeed = 0f;
     public float currentGravity = 0f;
