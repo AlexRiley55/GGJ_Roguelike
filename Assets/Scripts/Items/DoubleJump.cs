@@ -6,10 +6,11 @@ public class DoubleJump : Item { //TODO: this will break if more than 1 are appl
     float initialDJSpeed = 20f;
     float maxDJSpeed = 35f;
     float DJbasicAccel = 10f;
-    float DJAccel = 60f;
+    float DJAccel = 50f;
 
     float currentDJSpeed = 0;
 
+    bool DJumping = false;
     bool accelDJ = false;
 
     bool hasZeroedVert = false;
@@ -34,18 +35,29 @@ public class DoubleJump : Item { //TODO: this will break if more than 1 are appl
             canDoubleJump = false;
             hasZeroedVert = false;
             accelDJ = true;
+            DJumping = true;
         } else if (Input.GetAxis("Vertical") < 0.1 && accelDJ) {
-            currentDJSpeed = 0;
+            //currentDJSpeed = 0;
             accelDJ = false;
+        }
+
+        if (DJumping) {
+            currentDJSpeed += DJbasicAccel * Time.deltaTime;
         }
 
         if (accelDJ) {
             currentDJSpeed += DJAccel * Time.deltaTime;
-            cc.Move(pc.transform.up * currentDJSpeed * Time.deltaTime);
+            
+        }
 
-            if (currentDJSpeed >= maxDJSpeed) {
-                accelDJ = false;
-            }
+        if (DJumping) {
+            cc.Move(pc.transform.up * currentDJSpeed * Time.deltaTime);
+        }
+
+        if (currentDJSpeed >= maxDJSpeed) {
+            currentDJSpeed = 0;
+            accelDJ = false;
+            DJumping = false;
         }
 
         if (cc.isGrounded) {

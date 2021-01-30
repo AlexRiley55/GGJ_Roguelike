@@ -97,15 +97,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15fb063c2a176a94abd858f793937781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpStartingSpeed: 0.03
-  jumpMaxSpeed: 0.1
-  jumpAccel: 0.45
+  jumpStartingSpeed: 20
+  accelJumpMaxSpeed: 35
+  basicJumpAccel: 0
+  basicJumpMaxSpeed: 0
+  jumpAccel: 60
+  isJumping: 0
+  basicJumping: 0
   accelJump: 0
-  runSpeed: 20
-  health: 1
-  gravity: 3
+  runSpeed: 15
+  modifiedRunSpeed: 0
+  maxHealth: 100
+  modifiedmaxHealth: 0
+  currentHealth: 100
+  gravity: 30
   currentJumpSpeed: 0
+  currentBasicJumpSpeed: 0
+  currentAccelJumpSpeed: 0
   currentGravity: 0
+  shootSpeed: 10
 --- !u!143 &2542724959761230894
 CharacterController:
   m_ObjectHideFlags: 0

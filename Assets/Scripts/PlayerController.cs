@@ -5,10 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public float jumpStartingSpeed = 20f;
-    public float jumpMaxSpeed = 35f;
-    public float jumpAccel = 60f;
+    public float accelJumpMaxSpeed = 35f;
+    public float basicJumpAccel = 20f;
+    public float basicJumpMaxSpeed = 10f;
+    public float jumpAccel = 50f;
 
     public bool isJumping = false;
+    public bool basicJumping = false;
     public bool accelJump = false;
 
     public float runSpeed = 15f;
@@ -20,6 +23,8 @@ public class PlayerController : MonoBehaviour {
     public float gravity = 30f;
 
     public float currentJumpSpeed = 0f;
+    public float currentBasicJumpSpeed = 0f;
+    public float currentAccelJumpSpeed = 0f;
     public float currentGravity = 0f;
 
     Vector3 FacingDir = new Vector3(1, 0, 0);
@@ -48,15 +53,6 @@ public class PlayerController : MonoBehaviour {
     void Update() {
         CharacterController cc = gameObject.GetComponent(typeof(CharacterController)) as CharacterController;
 
-        if (accelJump) {
-            currentJumpSpeed += jumpAccel * Time.deltaTime;
-
-            if (currentJumpSpeed >= jumpMaxSpeed) {
-                currentJumpSpeed = 0;
-                accelJump = false;
-            }
-        }
-
         move();
 
         if (Input.GetKeyDown("space")) { //TODO: make this use axis for compatability later?
@@ -76,7 +72,6 @@ public class PlayerController : MonoBehaviour {
             currentGravity += gravity * Time.deltaTime;
         } else {
             currentGravity = 0;
-            isJumping = false;
         }
 
         if (Input.GetAxis("Horizontal") > 0.1) {
@@ -94,13 +89,44 @@ public class PlayerController : MonoBehaviour {
             isJumping = true;
             currentGravity = 0;
             currentJumpSpeed = jumpStartingSpeed;
+            currentAccelJumpSpeed = jumpStartingSpeed;
             accelJump = true;
+            basicJumping = true;
         } else if (Input.GetAxis("Vertical") < 0.1 && accelJump) {
-            currentJumpSpeed = 0;
             accelJump = false;
+            currentJumpSpeed -= currentAccelJumpSpeed;
+            currentAccelJumpSpeed = 0;
         }
 
-        cc.Move(transform.up * currentJumpSpeed * Time.deltaTime);
+        if (basicJumping) {
+            currentJumpSpeed += basicJumpAccel * Time.deltaTime;
+            currentBasicJumpSpeed += basicJumpAccel * Time.deltaTime;
+            if (currentBasicJumpSpeed >= basicJumpMaxSpeed) {
+                basicJumping = false;
+                currentJumpSpeed -= currentBasicJumpSpeed;
+                currentBasicJumpSpeed = 0;
+            }
+        }
+
+        if (accelJump) {
+            currentJumpSpeed += jumpAccel * Time.deltaTime;
+            currentAccelJumpSpeed += jumpAccel * Time.deltaTime;
+            if (currentAccelJumpSpeed >= accelJumpMaxSpeed) {
+                accelJump = false;
+                currentJumpSpeed -= currentAccelJumpSpeed;
+                currentAccelJumpSpeed = 0;
+            }
+        }
+
+        if (isJumping) {
+            cc.Move(transform.up * currentJumpSpeed * Time.deltaTime);
+        }
+
+        if ((!basicJumping && !accelJump) || !isJumping) { //others can cancel a jump by setting isJumping to false
+            currentJumpSpeed = 0;
+            currentBasicJumpSpeed = 0;
+            isJumping = false;
+        }
 
         Vector3 move = transform.right * Input.GetAxis("Horizontal") * modifiedRunSpeed + transform.up * -1 * currentGravity;
         cc.Move(move * Time.deltaTime);
