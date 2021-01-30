@@ -39,8 +39,8 @@ public class PlayerController : MonoBehaviour {
         modifiedRunSpeed = runSpeed;
         modifiedmaxHealth = maxHealth;
 
-        //attachItem(new DoubleJump());
-        attachItem(new RunningBoots());
+        attachItem(new DoubleJump());
+        //attachItem(new RunningBoots());
         //detachItem(new RunningBoots());
     }
 
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour {
 
         move();
 
-        if (Input.GetKeyUp("space")) { //TODO: make this use axis for compatability later?
+        if (Input.GetKeyDown("space")) { //TODO: make this use axis for compatability later?
             Debug.Log("Fire");
             attack();
         }
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour {
             accelJump = false;
         }
 
-        cc.Move(transform.up * currentJumpSpeed);
+        cc.Move(transform.up * currentJumpSpeed * Time.deltaTime);
 
         Vector3 move = transform.right * Input.GetAxis("Horizontal") * modifiedRunSpeed + transform.up * -1 * currentGravity;
         cc.Move(move * Time.deltaTime);

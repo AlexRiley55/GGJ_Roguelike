@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DoubleJump : Item { //TODO: this will break if more than 1 are applied
-    float doubleJumpSpeed = 5f;
+    float doubleJumpSpeed = 500f;
 
     bool hasZeroedVert = false;
     bool canDoubleJump = true;
@@ -29,7 +29,7 @@ public class DoubleJump : Item { //TODO: this will break if more than 1 are appl
         if (Input.GetAxis("Vertical") > 0.1 && !cc.isGrounded && !pc.accelJump && canDoubleJump && hasZeroedVert) {
             Debug.Log("Double Jump");
             pc.currentGravity = 0;
-            pc.currentJumpSpeed = doubleJumpSpeed;
+            cc.Move(pc.transform.up * doubleJumpSpeed * Time.deltaTime);
             canDoubleJump = false;
             justDoubleJumped = true;
             hasZeroedVert = false;

@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         player = PlayerController.getPlayer();
-        Debug.Log(player.transform.position.x);
 
         if (nextSegmentStart.x - player.transform.position.x < 50f) { //TODO: delete old segments from the front? 
             generateSegment();
