@@ -14,8 +14,11 @@ public class PlayerController : MonoBehaviour {
     public float health;
     public float gravity;
 
-    float currentJumpSpeed = 0;
-    float currentGravity = 0;
+    float currentJumpSpeed = 0f;
+    float currentGravity = 0f;
+
+    Vector3 FacingDir = new Vector3(1, 0, 0);
+    public float shootSpeed = 5f;
 
     // Start is called before the first frame update
     void Start() {
@@ -35,6 +38,11 @@ public class PlayerController : MonoBehaviour {
         }
 
         move();
+
+        if (Input.GetKeyUp("space")) { //TODO: make this use axis for compatability later?
+            Debug.Log("Fire");
+            attack();
+        }
     }
 
     public void move() {
@@ -48,10 +56,12 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetAxis("Horizontal") > 0.1) {
             Debug.Log("Right");
+            FacingDir.x = 1;
         }
 
         if (Input.GetAxis("Horizontal") < -0.1) {
             Debug.Log("Left");
+            FacingDir.x = -1;
         }
 
         if (Input.GetAxis("Vertical") > 0.1 && cc.isGrounded) {
@@ -68,5 +78,13 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 move = transform.right * Input.GetAxis("Horizontal") + transform.up * -1 * currentGravity;
         cc.Move(runSpeed * Time.deltaTime * move);
+    }
+
+    public void attack() {
+        GameObject projectilePrefab = Resources.Load<GameObject>("Prefabs/Projectile");
+        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        Rigidbody2D projectileRB = projectile.GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
+
+        projectileRB.velocity = FacingDir * shootSpeed;
     }
 }
