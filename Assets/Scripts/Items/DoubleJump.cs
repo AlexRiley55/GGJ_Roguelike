@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DoubleJump : Item { //TODO: this will break if more than 1 are applied
-    float doubleJumpSpeed = 500f;
+    float initialDJSpeed = 20f;
+    float maxDJSpeed = 35f;
+    float DJbasicAccel = 10f;
+    float DJAccel = 60f;
+
+    float currentDJSpeed = 0;
+
+    bool accelDJ = false;
 
     bool hasZeroedVert = false;
     bool canDoubleJump = true;
-    bool justDoubleJumped = false;
 
     public DoubleJump() {
         name = "Double Jump";
@@ -21,20 +27,27 @@ public class DoubleJump : Item { //TODO: this will break if more than 1 are appl
         GameObject player = pc.gameObject;
         CharacterController cc = player.GetComponent(typeof(CharacterController)) as CharacterController;
 
-        if (justDoubleJumped) {
-            pc.currentJumpSpeed = 0;
-            justDoubleJumped = false;
-        }
-
-        if (Input.GetAxis("Vertical") > 0.1 && !cc.isGrounded && !pc.accelJump && canDoubleJump && hasZeroedVert) {
+        if (Input.GetAxis("Vertical") > 0.1 && !cc.isGrounded && canDoubleJump && hasZeroedVert) {
             Debug.Log("Double Jump");
             pc.currentGravity = 0;
-            cc.Move(pc.transform.up * doubleJumpSpeed * Time.deltaTime);
+            currentDJSpeed = initialDJSpeed;
             canDoubleJump = false;
-            justDoubleJumped = true;
             hasZeroedVert = false;
+            accelDJ = true;
+        } else if (Input.GetAxis("Vertical") < 0.1 && accelDJ) {
+            currentDJSpeed = 0;
+            accelDJ = false;
         }
-        
+
+        if (accelDJ) {
+            currentDJSpeed += DJAccel * Time.deltaTime;
+            cc.Move(pc.transform.up * currentDJSpeed * Time.deltaTime);
+
+            if (currentDJSpeed >= maxDJSpeed) {
+                accelDJ = false;
+            }
+        }
+
         if (cc.isGrounded) {
             canDoubleJump = true;
             hasZeroedVert = false;
