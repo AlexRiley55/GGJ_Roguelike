@@ -9,7 +9,7 @@ public class RunningBoots : Item {
     }
 
     public override void Start(PlayerController pc) {
-        pc.modifiedRunSpeed *= 1.20f;
+        pc.modifiedRunSpeed *= 5.0f;
     }
 
     public override void Update(PlayerController pc) {
@@ -17,6 +17,6 @@ public class RunningBoots : Item {
     }
 
     public override void End(PlayerController pc) {
-        pc.modifiedRunSpeed /= 1.20f;
+        pc.modifiedRunSpeed /= 5.0f;
     }
 }

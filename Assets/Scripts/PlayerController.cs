@@ -32,15 +32,15 @@ public class PlayerController : MonoBehaviour {
 
     public List<Item> items = new List<Item>();
 
-    static GameObject player;
+    static PlayerController playerController;
 
-    public static GameObject getPlayer() {
-        return player;
+    public static PlayerController getPlayer() {
+        return playerController;
     }
 
     // Start is called before the first frame update
     void Start() {
-        player = gameObject;
+        playerController = gameObject.GetComponent(typeof(PlayerController)) as PlayerController;
         modifiedRunSpeed = runSpeed;
         modifiedmaxHealth = maxHealth;
 

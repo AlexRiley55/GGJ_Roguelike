@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
+    public int score = 0;
+
     GameObject[] levelSegments;
     Vector3 nextSegmentStart = new Vector3();
 
-    GameObject player;
+    PlayerController playerController;
+
+    static GameManager gameManager;
+
+    public static GameManager getGame() {
+        return gameManager;
+    }
 
     // Start is called before the first frame update
     void Start() {
+        gameManager = gameObject.GetComponent(typeof(GameManager)) as GameManager;
 
         levelSegments = Resources.LoadAll<GameObject>("Prefabs/LevelSegments") as GameObject[];
         Debug.Log("Loaded: " + levelSegments.Length  + "Segments");
@@ -22,9 +31,9 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        player = PlayerController.getPlayer();
+        playerController = PlayerController.getPlayer();
 
-        if (nextSegmentStart.x - player.transform.position.x < 50f) { //TODO: delete old segments from the front? 
+        if (nextSegmentStart.x - playerController.gameObject.transform.position.x < 50f) { //TODO: delete old segments from the front? 
             generateSegment();
         }
     }
