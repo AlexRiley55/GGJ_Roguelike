@@ -2,23 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RunningBoots : Item {
+public class HealingAura : Item {
+    float healingRate = 2f;
 
-    float damageRate = 1f;
-
-    public RunningBoots() {
-        name = "Running Boots";
+    public HealingAura() {
+        name = "Healing Aura";
     }
 
     public override void Start(PlayerController pc) {
-        pc.modifiedRunSpeed *= 5.0f;
+
     }
 
     public override void Update(PlayerController pc) {
-        pc.currentHealth -= damageRate * Time.deltaTime;
+        pc.currentHealth += healingRate * Time.deltaTime;
     }
 
     public override void End(PlayerController pc) {
-        pc.modifiedRunSpeed /= 5.0f;
+
     }
 }

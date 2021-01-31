@@ -23,7 +23,8 @@ public abstract class Item {
                 new DoubleJump(),
                 new AntiGravity(),
                 new Glide(),
-                new InfiniteKey()
+                new InfiniteKey(),
+                new HealingAura()
             };
         }
 

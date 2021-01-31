@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
     public float modifiedRunSpeed;
 
     public float maxHealth = 100f;
-    public float modifiedmaxHealth;
+    public float modifiedMaxHealth;
     public float currentHealth = 100f;
     public float gravity = 30f;
     public float modifiedGravity;
@@ -41,14 +41,17 @@ public class PlayerController : MonoBehaviour {
 
     public int keys;
 
+    void Awake() {
+        playerController = gameObject.GetComponent(typeof(PlayerController)) as PlayerController;
+    }
+
     // Start is called before the first frame update
     void Start() {
-        playerController = gameObject.GetComponent(typeof(PlayerController)) as PlayerController;
         modifiedRunSpeed = runSpeed;
-        modifiedmaxHealth = maxHealth;
+        modifiedMaxHealth = maxHealth;
         modifiedGravity = gravity;
 
-        attachItem(new InfiniteKey());
+        attachItem(new HealingAura());
     }
 
     // Update is called once per frame
@@ -65,6 +68,8 @@ public class PlayerController : MonoBehaviour {
         foreach (Item item in items) {
             item.Update(this);
         }
+
+        checkHealth();
     }
 
     public void move() {
@@ -77,12 +82,10 @@ public class PlayerController : MonoBehaviour {
         }
 
         if (Input.GetAxis("Horizontal") > 0.1) {
-            Debug.Log("Right");
             FacingDir.x = 1;
         }
 
         if (Input.GetAxis("Horizontal") < -0.1) {
-            Debug.Log("Left");
             FacingDir.x = -1;
         }
 
@@ -152,5 +155,17 @@ public class PlayerController : MonoBehaviour {
         Debug.Log("Detaching " + item.name);
         item.End(this);
         items.Remove(item);
+    }
+
+    public void checkHealth() {
+        if (currentHealth > modifiedMaxHealth) {
+            currentHealth = modifiedMaxHealth;
+        } else if (currentHealth <= 0) {
+            killPlayer();
+        }
+    }
+
+    public void killPlayer() {
+        Debug.Log("Player has died");
     }
 }
