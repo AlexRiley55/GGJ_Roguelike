@@ -9,8 +9,8 @@ public class BouncyShoes : Item {
 
     public override void Start(PlayerData pd) {
         Rigidbody2D rb = pd.gameObject.GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
-        rb.gravityScale *= 6;
-        pd.pMaster.m_JumpForce *= 4f;
+        //rb.gravityScale *= 6;
+        //pd.pMaster.m_JumpForce *= 3f;
     }
 
     public override void Update(PlayerData pd) {
@@ -21,7 +21,7 @@ public class BouncyShoes : Item {
 
     public override void End(PlayerData pd) {
         Rigidbody2D rb = pd.gameObject.GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
-        rb.gravityScale /= 6;
-        pd.pMaster.m_JumpForce /= 4f;
+        //rb.gravityScale /= 6;
+        //pd.pMaster.m_JumpForce /= 3f;
     }
 }

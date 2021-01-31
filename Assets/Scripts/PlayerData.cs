@@ -31,7 +31,7 @@ public class PlayerData : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         modifiedMaxHealth = maxHealth;
-        attachItem(new BouncyShoes());
+        attachItem(new Glide());
     }
 
     // Update is called once per frame
