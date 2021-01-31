@@ -20,11 +20,13 @@ public abstract class Item {
         if (allItems == null) {
             allItems = new Item[] {
                 new RunningBoots(),
-                new DoubleJump(),
+                //new DoubleJump(),
                 new AntiGravity(),
                 new Glide(),
                 new InfiniteKey(),
-                new HealingAura()
+                new LeapingBoots(),
+                new BouncyShoes()
+                //new HealingAura()
             };
         }
 

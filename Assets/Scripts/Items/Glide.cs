@@ -38,10 +38,14 @@ public class Glide : Item {
         prior_modifiedGravity = pc.modifiedGravity;
         pc.modifiedGravity = 10;
         */
+
+        pd.pMaster.m_MovementSmoothing *= 3;
     }
 
     public override void Update(PlayerData pd) {
-
+        if (pd.pMovement.jumping == true) {
+            pd.pMaster.playerRigidbody2D.AddForce(new Vector2(0f, 2));
+        }
     }
 
     public override void End(PlayerData pd) {
@@ -60,5 +64,7 @@ public class Glide : Item {
 
         pc.modifiedGravity = prior_modifiedGravity;
         */
+
+        pd.pMaster.m_MovementSmoothing *= 3;
     }
 }

@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class RunningBoots : Item {
 
-    float damageRate = 1f;
-
     public RunningBoots() {
         name = "Running Boots";
     }
 
     public override void Start(PlayerData pd) {
-        //pc.modifiedRunSpeed *= 5.0f;
+        pd.pMovement.runSpeed *= 3.0f;
+        pd.pMaster.m_MovementSmoothing *= 1.2f;
     }
 
     public override void Update(PlayerData pd) {
-        //pd.currentHealth -= damageRate * Time.deltaTime;
     }
 
     public override void End(PlayerData pd) {
-        //pc.modifiedRunSpeed /= 5.0f;
+        pd.pMovement.runSpeed /= 3.0f;
+        pd.pMaster.m_MovementSmoothing /= 1.2f;
     }
 }

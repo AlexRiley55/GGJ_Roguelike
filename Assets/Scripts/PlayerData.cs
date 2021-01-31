@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlayerData : MonoBehaviour {
 
-    public PlayerController pc; //TODO
+    //public PlayerController pc; //TODO
+
+    public PlayerMaster pMaster;
+    public PlayerMovement pMovement;
 
     public float maxHealth = 100f;
     public float modifiedMaxHealth;
@@ -21,12 +24,14 @@ public class PlayerData : MonoBehaviour {
 
     void Awake() {
         playerData = gameObject.GetComponent(typeof(PlayerData)) as PlayerData;
+        pMaster = gameObject.GetComponent(typeof(PlayerMaster)) as PlayerMaster;
+        pMovement = gameObject.GetComponent(typeof(PlayerMovement)) as PlayerMovement;
     }
 
     // Start is called before the first frame update
     void Start() {
         modifiedMaxHealth = maxHealth;
-        attachItem(new HealingAura());
+        attachItem(new BouncyShoes());
     }
 
     // Update is called once per frame
