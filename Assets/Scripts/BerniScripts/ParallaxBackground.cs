@@ -35,7 +35,10 @@ public class ParallaxBackground : MonoBehaviour
     {
         foreach (ParallaxLayer layer in parallaxLayers)
         {
-            layer.Move(deltaX, deltaY);
+            if (layer != null)
+            {
+                layer.Move(deltaX, deltaY);
+            }
         }
     }
 }

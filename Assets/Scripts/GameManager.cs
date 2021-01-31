@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour {
     Queue<GameObject> loadedFrames = new Queue<GameObject>();
 
     PlayerController playerController;
+    public GameObject playerObject;
+    public GameObject virtualCam;
 
     static GameManager gameManager;
 
@@ -37,9 +39,9 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        playerController = PlayerController.getPlayer();
+        //playerController = PlayerController.getPlayer();
 
-        if (nextSegmentStart.x - playerController.gameObject.transform.position.x < 50f) { //TODO: delete old segments from the front? 
+        if (nextSegmentStart.x - playerObject.transform.position.x < 50f) { //TODO: delete old segments from the front? 
             generateSegment();
         }
     }
@@ -64,10 +66,10 @@ public class GameManager : MonoBehaviour {
     }
 
     public void restart() {
-        GameObject player = playerController.gameObject;
-        CharacterController cc = player.GetComponent(typeof(CharacterController)) as CharacterController;
+        GameObject _player = playerObject;//playerController.gameObject;
+        CharacterController cc = playerObject.GetComponent(typeof(CharacterController)) as CharacterController;
         cc.enabled = false;
-        player.transform.position = playerSpawn;
+        _player.transform.position = playerSpawn;
         cc.enabled = true;
         playerController.reset();
 
@@ -94,12 +96,16 @@ public class GameManager : MonoBehaviour {
     void instanciatePlayer() {
         GameObject playerPrefab = Resources.Load<GameObject>("Prefabs/Player") as GameObject;
         GameObject player = Instantiate(playerPrefab, playerSpawn, Quaternion.identity);
+        playerObject = player;
+        virtualCam.GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = playerObject.transform;
+
         player.name = "Player";
     }
 
     void freeOldFrames() {
         while (loadedFrames.Count > 5) {
             GameObject removedFrame = loadedFrames.Dequeue();
+            removedFrame.GetComponent<ParallaxBackground>().enabled = false;
             Destroy(removedFrame);
             //TODO: move the milky blackness
         }
