@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     Vector3 origin = new Vector3(); //0,0,0
-    Vector3 playerSpawn = new Vector3(-16,2.6f,0);
+    Vector3 playerSpawn = new Vector3(-22,2.6f,0);
 
     public int highScore = 0;
     public int score = 0;
