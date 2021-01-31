@@ -167,5 +167,38 @@ public class PlayerController : MonoBehaviour {
 
     public void killPlayer() {
         Debug.Log("Player has died");
+        GameManager gm = GameManager.getGame();
+        gm.restart();
+    }
+
+    public void reset() {
+        jumpStartingSpeed = 20f;
+        accelJumpMaxSpeed = 35f;
+        basicJumpAccel = 20f;
+        basicJumpMaxSpeed = 10f;
+        jumpAccel = 50f;
+
+        isJumping = false;
+        basicJumping = false;
+        accelJump = false;
+
+        runSpeed = 15f;
+
+        maxHealth = 100f;
+        currentHealth = 100f;
+        gravity = 30f;
+
+        currentJumpSpeed = 0f;
+        currentBasicJumpSpeed = 0f;
+        currentAccelJumpSpeed = 0f;
+        currentGravity = 0f;
+
+        FacingDir = new Vector3(1, 0, 0);
+        shootSpeed = 10f;
+
+        items = new List<Item>();
+
+        Awake();
+        Start();
     }
 }

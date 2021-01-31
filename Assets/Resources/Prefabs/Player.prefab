@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2542724959761230894}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,14 +108,16 @@ MonoBehaviour:
   runSpeed: 15
   modifiedRunSpeed: 0
   maxHealth: 100
-  modifiedmaxHealth: 0
+  modifiedMaxHealth: 100
   currentHealth: 100
   gravity: 30
+  modifiedGravity: 0
   currentJumpSpeed: 0
   currentBasicJumpSpeed: 0
   currentAccelJumpSpeed: 0
   currentGravity: 0
   shootSpeed: 10
+  keys: 0
 --- !u!143 &2542724959761230894
 CharacterController:
   m_ObjectHideFlags: 0
@@ -193,7 +195,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 22.70506
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

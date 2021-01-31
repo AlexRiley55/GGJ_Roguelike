@@ -11,12 +11,15 @@ public class KillWall : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        Debug.Log(PlayerController.getPlayer() == null);
-        pc = PlayerController.getPlayer();
+        
     }
 
     // Update is called once per frame
     void Update() {
+        if (pc == null) { //needs to initialize late after Player is spawned
+            pc = PlayerController.getPlayer();
+        }
+
         PlayerController t = pc;
         GameObject player = pc.gameObject;
         if (active && player.transform.position.y <= killHeight) {

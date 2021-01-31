@@ -48,6 +48,6 @@ public class NPC : MonoBehaviour {
         pc.attachItem(Item.getRandomItem());
 
         GameManager gm = GameManager.getGame();
-        gm.score++;
+        gm.addScore();
     }
 }

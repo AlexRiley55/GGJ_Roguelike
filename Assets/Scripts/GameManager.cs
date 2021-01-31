@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
+    Vector3 origin = new Vector3(); //0,0,0
+    Vector3 playerSpawn = new Vector3(6,2.6f,0);
+
+    public int highScore = 0;
     public int score = 0;
 
     GameObject[] levelSegments;
-    Vector3 nextSegmentStart = new Vector3();
+    Vector3 nextSegmentStart;
+
+    Queue<GameObject> loadedFrames = new Queue<GameObject>();
 
     PlayerController playerController;
 
@@ -20,13 +26,13 @@ public class GameManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         gameManager = gameObject.GetComponent(typeof(GameManager)) as GameManager;
+        nextSegmentStart = origin;
+
+        instanciateSpawn();
+        instanciatePlayer();
 
         levelSegments = Resources.LoadAll<GameObject>("Prefabs/LevelSegments") as GameObject[];
         Debug.Log("Loaded: " + levelSegments.Length  + "Segments");
-
-        for (int i = 0; i < 1; i++) {
-            generateSegment();
-        }
     }
 
     // Update is called once per frame
@@ -42,9 +48,60 @@ public class GameManager : MonoBehaviour {
         int randIndex = Random.Range(0, levelSegments.Length);
         Debug.Log("Generated Segment: " + randIndex);
         GameObject prefabToInstanciate = levelSegments[randIndex];
-        Instantiate(prefabToInstanciate, nextSegmentStart, Quaternion.identity);
+        GameObject loadedFrame = Instantiate(prefabToInstanciate, nextSegmentStart, Quaternion.identity);
+        loadedFrames.Enqueue(loadedFrame);
 
         //move the next spawn up by the length of the segment we just spawned
         nextSegmentStart.x += (prefabToInstanciate.GetComponent(typeof(LevelSegment)) as LevelSegment).length;
+        freeOldFrames();
+    }
+
+    public void addScore() {
+        score++;
+        if (score > highScore) {
+            highScore++;
+        }
+    }
+
+    public void restart() {
+        GameObject player = playerController.gameObject;
+        CharacterController cc = player.GetComponent(typeof(CharacterController)) as CharacterController;
+        cc.enabled = false;
+        player.transform.position = playerSpawn;
+        cc.enabled = true;
+        playerController.reset();
+
+        foreach (GameObject frame in loadedFrames) {
+            Destroy(frame);
+        }
+
+        loadedFrames.Clear();
+
+        nextSegmentStart = origin;
+        instanciateSpawn();
+
+        score = 0;
+    }
+
+    void instanciateSpawn() {
+        GameObject spawnPrefab = Resources.Load<GameObject>("Prefabs/Spawn") as GameObject;
+        GameObject spawn = Instantiate(spawnPrefab, origin, Quaternion.identity);
+        loadedFrames.Enqueue(spawn);
+        //move the next spawn up by the length of the segment we just spawned
+        nextSegmentStart.x += (spawnPrefab.GetComponent(typeof(LevelSegment)) as LevelSegment).length;
+    }
+
+    void instanciatePlayer() {
+        GameObject playerPrefab = Resources.Load<GameObject>("Prefabs/Player") as GameObject;
+        GameObject player = Instantiate(playerPrefab, playerSpawn, Quaternion.identity);
+        player.name = "Player";
+    }
+
+    void freeOldFrames() {
+        while (loadedFrames.Count > 5) {
+            GameObject removedFrame = loadedFrames.Dequeue();
+            Destroy(removedFrame);
+            //TODO: move the milky blackness
+        }
     }
 }
