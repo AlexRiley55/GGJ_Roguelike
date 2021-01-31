@@ -6,6 +6,7 @@ public class NPC : MonoBehaviour {
 
     public Sprite usedSprite;
     bool collidingWithPlayer = false;
+    bool used = false;
 
     // Start is called before the first frame update
     void Start() {
@@ -14,7 +15,7 @@ public class NPC : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown("e") && collidingWithPlayer) {
+        if (Input.GetKeyDown("e") && collidingWithPlayer && !used) {
             PlayerController player = PlayerController.getPlayer();
             setUsed();
             tradeItem(player);
@@ -36,6 +37,7 @@ public class NPC : MonoBehaviour {
     void setUsed() {
         SpriteRenderer sr = gameObject.GetComponent(typeof(SpriteRenderer)) as SpriteRenderer;
         sr.sprite = usedSprite;
+        used = true;
     }
 
     void tradeItem(PlayerController pc) {

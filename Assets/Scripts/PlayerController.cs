@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour {
     public float modifiedmaxHealth;
     public float currentHealth = 100f;
     public float gravity = 30f;
+    public float modifiedGravity;
 
     public float currentJumpSpeed = 0f;
     public float currentBasicJumpSpeed = 0f;
@@ -38,15 +39,16 @@ public class PlayerController : MonoBehaviour {
         return playerController;
     }
 
+    public int keys;
+
     // Start is called before the first frame update
     void Start() {
         playerController = gameObject.GetComponent(typeof(PlayerController)) as PlayerController;
         modifiedRunSpeed = runSpeed;
         modifiedmaxHealth = maxHealth;
+        modifiedGravity = gravity;
 
-        attachItem(new DoubleJump());
-        //attachItem(new RunningBoots());
-        //detachItem(new RunningBoots());
+        attachItem(new InfiniteKey());
     }
 
     // Update is called once per frame
@@ -69,7 +71,7 @@ public class PlayerController : MonoBehaviour {
         CharacterController cc = gameObject.GetComponent(typeof(CharacterController)) as CharacterController;
 
         if (!cc.isGrounded) {
-            currentGravity += gravity * Time.deltaTime;
+            currentGravity += modifiedGravity * Time.deltaTime;
         } else {
             currentGravity = 0;
         }
