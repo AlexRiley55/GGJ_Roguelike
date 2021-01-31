@@ -65,6 +65,6 @@ public class Glide : Item {
         pc.modifiedGravity = prior_modifiedGravity;
         */
 
-        pd.pMaster.m_MovementSmoothing *= 3;
+        pd.pMaster.m_MovementSmoothing /= 3;
     }
 }

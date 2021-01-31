@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         gameManager = gameObject.GetComponent(typeof(GameManager)) as GameManager;
-        playerData = PlayerData.getPlayerData();
         nextSegmentStart = origin;
 
         instanciateSpawn();
@@ -46,6 +45,9 @@ public class GameManager : MonoBehaviour {
         recordScores = RecordScores.getRecordScores();
         recordScores.setScore(score);
         recordScores.setHighScore(highScore);
+
+        playerData = PlayerData.getPlayerData();
+        playerData.attachItem(new Glide());
     }
 
     // Update is called once per frame
@@ -97,7 +99,10 @@ public class GameManager : MonoBehaviour {
         nextSegmentStart = origin;
         instanciateSpawn();
 
+        playerData.attachItem(new Glide());
+
         score = 0;
+        recordScores.setScore(score);
     }
 
     void instanciateSpawn() {
