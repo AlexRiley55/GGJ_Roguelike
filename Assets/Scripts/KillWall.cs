@@ -5,7 +5,7 @@ using UnityEngine;
 public class KillWall : MonoBehaviour {
 
     public float killHeight = -10;
-    PlayerController pc;
+    PlayerData pd;
 
     public bool active = true;
 
@@ -16,14 +16,13 @@ public class KillWall : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (pc == null) { //needs to initialize late after Player is spawned
-            pc = PlayerController.getPlayer();
+        if (pd == null) { //needs to initialize late after Player is spawned
+            pd = PlayerData.getPlayerData();
         }
 
-        PlayerController t = pc;
-        GameObject player = pc.gameObject;
+        GameObject player = pd.gameObject;
         if (active && player.transform.position.y <= killHeight) {
-            pc.killPlayer();
+            pd.killPlayer();
         }
     }
 }

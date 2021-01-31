@@ -17,9 +17,6 @@ public class PlayerController : MonoBehaviour {
     public float runSpeed = 15f;
     public float modifiedRunSpeed;
 
-    public float maxHealth = 100f;
-    public float modifiedMaxHealth;
-    public float currentHealth = 100f;
     public float gravity = 30f;
     public float modifiedGravity;
 
@@ -31,15 +28,11 @@ public class PlayerController : MonoBehaviour {
     Vector3 FacingDir = new Vector3(1, 0, 0);
     public float shootSpeed = 10f;
 
-    public List<Item> items = new List<Item>();
-
     static PlayerController playerController;
 
     public static PlayerController getPlayer() {
         return playerController;
     }
-
-    public int keys;
 
     void Awake() {
         playerController = gameObject.GetComponent(typeof(PlayerController)) as PlayerController;
@@ -48,28 +41,12 @@ public class PlayerController : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         modifiedRunSpeed = runSpeed;
-        modifiedMaxHealth = maxHealth;
         modifiedGravity = gravity;
-
-        attachItem(new HealingAura());
     }
 
     // Update is called once per frame
     void Update() {
-        CharacterController cc = gameObject.GetComponent(typeof(CharacterController)) as CharacterController;
-
         move();
-
-        if (Input.GetKeyDown("left shift")) { //TODO: make this use axis for compatability later?
-            Debug.Log("Fire");
-            attack();
-        }
-
-        foreach (Item item in items) {
-            item.Update(this);
-        }
-
-        checkHealth();
     }
 
     public void move() {
@@ -137,41 +114,7 @@ public class PlayerController : MonoBehaviour {
         cc.Move(move * Time.deltaTime);
     }
 
-    public void attack() {
-        GameObject projectilePrefab = Resources.Load<GameObject>("Prefabs/Projectile"); //TODO: this is slow so do it earlier
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        Rigidbody2D projectileRB = projectile.GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
-
-        projectileRB.velocity = FacingDir * shootSpeed;
-    }
-
-    public void attachItem(Item item) {
-        Debug.Log("Attaching " + item.name);
-        item.Start(this);
-        items.Add(item);
-    }
-
-    public void detachItem(Item item) {
-        Debug.Log("Detaching " + item.name);
-        item.End(this);
-        items.Remove(item);
-    }
-
-    public void checkHealth() {
-        if (currentHealth > modifiedMaxHealth) {
-            currentHealth = modifiedMaxHealth;
-        } else if (currentHealth <= 0) {
-            killPlayer();
-        }
-    }
-
-    public void killPlayer() {
-        Debug.Log("Player has died");
-        GameManager gm = GameManager.getGame();
-        gm.restart();
-    }
-
-    public void reset() {
+    public void resetVars() {
         jumpStartingSpeed = 20f;
         accelJumpMaxSpeed = 35f;
         basicJumpAccel = 20f;
@@ -184,8 +127,6 @@ public class PlayerController : MonoBehaviour {
 
         runSpeed = 15f;
 
-        maxHealth = 100f;
-        currentHealth = 100f;
         gravity = 30f;
 
         currentJumpSpeed = 0f;
@@ -195,10 +136,7 @@ public class PlayerController : MonoBehaviour {
 
         FacingDir = new Vector3(1, 0, 0);
         shootSpeed = 10f;
-
-        items = new List<Item>();
-
-        Awake();
-        Start();
     }
+
+    
 }

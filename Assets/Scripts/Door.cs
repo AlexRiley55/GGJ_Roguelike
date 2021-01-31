@@ -22,9 +22,9 @@ public class Door : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.name == "Player") {
-            PlayerController pc = PlayerController.getPlayer();
-            if (pc.keys > 0) {
-                pc.keys--;
+            PlayerData pd = PlayerData.getPlayerData();
+            if (pd.keys > 0) {
+                pd.keys--;
                 opening = true;
             }
         }

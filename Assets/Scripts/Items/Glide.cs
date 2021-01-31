@@ -15,7 +15,8 @@ public class Glide : Item {
         name = "Glide";
     }
 
-    public override void Start(PlayerController pc) {
+    public override void Start(PlayerData pd) {
+        /*
         prior_jumpStartingSpeed = pc.jumpStartingSpeed;
         pc.jumpStartingSpeed = 20;
 
@@ -36,13 +37,15 @@ public class Glide : Item {
 
         prior_modifiedGravity = pc.modifiedGravity;
         pc.modifiedGravity = 10;
+        */
     }
 
-    public override void Update(PlayerController pc) {
+    public override void Update(PlayerData pd) {
 
     }
 
-    public override void End(PlayerController pc) {
+    public override void End(PlayerData pd) {
+        /*
         pc.jumpStartingSpeed = prior_jumpStartingSpeed;
 
         pc.accelJumpMaxSpeed = prior_accelJumpMaxSpeed;
@@ -56,5 +59,6 @@ public class Glide : Item {
         pc.modifiedRunSpeed = prior_modifiedRunSpeed;
 
         pc.modifiedGravity = prior_modifiedGravity;
+        */
     }
 }

@@ -16,36 +16,39 @@ public class NPC : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (Input.GetKeyDown("e") && collidingWithPlayer && !used) {
-            PlayerController player = PlayerController.getPlayer();
-            setUsed();
-            tradeItem(player);
+            GameManager gm = GameManager.getGame();
+            gm.enableDiologue(this);
         }
     }
 
-    void OnTriggerEnter(Collider other) {
+    void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("enter");
+
         if (other.gameObject.name == "Player") {
             collidingWithPlayer = true;
         }
     }
 
-    void OnTriggerExit(Collider other) {
+    void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.name == "Player") {
             collidingWithPlayer = false;
         }
     }
 
-    void setUsed() {
+    public void setUsed() {
         SpriteRenderer sr = gameObject.GetComponent(typeof(SpriteRenderer)) as SpriteRenderer;
         sr.sprite = usedSprite;
         used = true;
+        PlayerData pd = PlayerData.getPlayerData();
+        tradeItem(pd);
     }
 
-    void tradeItem(PlayerController pc) {
-        int randIndex = Random.Range(0, pc.items.Count);
-        Item item = pc.items[randIndex];
+    void tradeItem(PlayerData pd) {
+        int randIndex = Random.Range(0, pd.items.Count);
+        Item item = pd.items[randIndex];
 
-        pc.detachItem(item);
-        pc.attachItem(Item.getRandomItem());
+        pd.detachItem(item);
+        pd.attachItem(Item.getRandomItem());
 
         GameManager gm = GameManager.getGame();
         gm.addScore();

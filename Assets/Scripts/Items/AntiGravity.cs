@@ -8,15 +8,15 @@ public class AntiGravity : Item {
         name = "Anti Gravity";
     }
 
-    public override void Start(PlayerController pc) {
-        pc.modifiedGravity /= 2.0f;
+    public override void Start(PlayerData pd) {
+        //pc.modifiedGravity /= 2.0f;
     }
 
-    public override void Update(PlayerController pc) {
+    public override void Update(PlayerData pd) {
 
     }
 
-    public override void End(PlayerController pc) {
-        pc.modifiedGravity *= 2.0f;
+    public override void End(PlayerData pd) {
+        //pc.modifiedGravity *= 2.0f;
     }
 }

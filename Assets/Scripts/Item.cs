@@ -6,13 +6,13 @@ public abstract class Item {
     public string name;
 
     //called when the item is attached
-    public abstract void Start(PlayerController pc);
+    public abstract void Start(PlayerData pd);
 
     // Update is called once per frame
-    public abstract void Update(PlayerController pc);
+    public abstract void Update(PlayerData pd);
 
     //called when the item is detached
-    public abstract void End(PlayerController pc);
+    public abstract void End(PlayerData pd);
 
     static Item[] allItems;
 
