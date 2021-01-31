@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour {
 
         move();
 
-        if (Input.GetKeyDown("space")) { //TODO: make this use axis for compatability later?
+        if (Input.GetKeyDown("left shift")) { //TODO: make this use axis for compatability later?
             Debug.Log("Fire");
             attack();
         }
