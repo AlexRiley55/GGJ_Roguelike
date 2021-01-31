@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     Vector3 origin = new Vector3(); //0,0,0
-    Vector3 playerSpawn = new Vector3(6,2.6f,0);
+    Vector3 playerSpawn = new Vector3(-16,2.6f,0);
 
     public int highScore = 0;
     public int score = 0;
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
     void Update() {
         //playerController = PlayerController.getPlayer();
 
-        if (nextSegmentStart.x - playerObject.transform.position.x < 50f) { //TODO: delete old segments from the front? 
+        if (nextSegmentStart.x - playerObject.transform.position.x < 100f) { //TODO: delete old segments from the front? 
             generateSegment();
         }
     }

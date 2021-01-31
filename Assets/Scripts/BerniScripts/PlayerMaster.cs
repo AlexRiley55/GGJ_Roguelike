@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class PlayerMaster : MonoBehaviour
 {
     public PlayerMovement playerMovement;
+    public Animator animator;
     [Space]
 
     [SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
@@ -51,10 +52,12 @@ public class PlayerMaster : MonoBehaviour
             {
                 Flip();
             }
+            animator.SetFloat("running", Mathf.Abs(move));
         }
         // If the player should jump...
         if (jump && !playerMovement.jumping)
         {
+            animator.SetBool("Jumping", jump);
             Debug.Log("Worked");
             // Add a vertical force to the player.
             playerMovement.jumping = true;
@@ -79,6 +82,7 @@ public class PlayerMaster : MonoBehaviour
         if(collision.gameObject.tag == "Platform")
         {
             playerMovement.jumping = false;
+            animator.SetBool("Jumping", false);
         }
     }
 
