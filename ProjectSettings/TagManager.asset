@@ -13,12 +13,12 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - CameraBounds
+  - Player
+  - DialogueTrigger
+  - AI
+  - IgnorePlayer
   - 
   - 
   - 
@@ -40,4 +40,61 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Layer10
+    uniqueID: 1665737463
+    locked: 0
+  - name: Layer9
+    uniqueID: 1050863587
+    locked: 0
+  - name: Layer8
+    uniqueID: 983652143
+    locked: 0
+  - name: Layer7
+    uniqueID: 594003181
+    locked: 0
+  - name: Layer6
+    uniqueID: 2567075275
+    locked: 0
+  - name: Layer5
+    uniqueID: 940121607
+    locked: 0
+  - name: Layer4
+    uniqueID: 4011462349
+    locked: 0
+  - name: Layer3
+    uniqueID: 825168295
+    locked: 0
+  - name: Layer2
+    uniqueID: 3602735839
+    locked: 0
+  - name: Layer1
+    uniqueID: 1428173937
+    locked: 0
+  - name: Player
+    uniqueID: 51941247
+    locked: 0
+  - name: Interactables
+    uniqueID: 1500873455
+    locked: 0
+  - name: Layer0
+    uniqueID: 2135706625
+    locked: 0
+  - name: Layer-1
+    uniqueID: 1038673171
+    locked: 0
+  - name: Layer-2
+    uniqueID: 2898709037
+    locked: 0
+  - name: Layer-3
+    uniqueID: 2234941685
+    locked: 0
+  - name: Layer-4
+    uniqueID: 125304727
+    locked: 0
+  - name: Layer-5
+    uniqueID: 1683753423
+    locked: 0
+  - name: Layer-6
+    uniqueID: 2955950121
     locked: 0
