@@ -9,15 +9,15 @@ public class HealingAura : Item {
         name = "Healing Aura";
     }
 
-    public override void Start(PlayerController pc) {
+    public override void Start(PlayerData pd) {
 
     }
 
-    public override void Update(PlayerController pc) {
-        pc.currentHealth += healingRate * Time.deltaTime;
+    public override void Update(PlayerData pd) {
+        pd.currentHealth += healingRate * Time.deltaTime;
     }
 
-    public override void End(PlayerController pc) {
+    public override void End(PlayerData pd) {
 
     }
 }

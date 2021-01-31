@@ -10,20 +10,20 @@ public class InfiniteKey : Item {
         name = "Infinite Key";
     }
 
-    public override void Start(PlayerController pc) {
+    public override void Start(PlayerData pd) {
 
     }
 
-    public override void Update(PlayerController pc) {
-        if (pc.keys == 0) {
+    public override void Update(PlayerData pd) {
+        if (pd.keys == 0) {
             gaveKey = true;
-            pc.keys += 1;
+            pd.keys += 1;
         }
     }
 
-    public override void End(PlayerController pc) {
+    public override void End(PlayerData pd) {
         if (gaveKey) {
-            pc.keys -= 1;
+            pd.keys -= 1;
         }
     }
 }

@@ -10,15 +10,15 @@ public class RunningBoots : Item {
         name = "Running Boots";
     }
 
-    public override void Start(PlayerController pc) {
-        pc.modifiedRunSpeed *= 5.0f;
+    public override void Start(PlayerData pd) {
+        //pc.modifiedRunSpeed *= 5.0f;
     }
 
-    public override void Update(PlayerController pc) {
-        pc.currentHealth -= damageRate * Time.deltaTime;
+    public override void Update(PlayerData pd) {
+        //pd.currentHealth -= damageRate * Time.deltaTime;
     }
 
-    public override void End(PlayerController pc) {
-        pc.modifiedRunSpeed /= 5.0f;
+    public override void End(PlayerData pd) {
+        //pc.modifiedRunSpeed /= 5.0f;
     }
 }

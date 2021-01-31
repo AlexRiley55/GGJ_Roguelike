@@ -24,12 +24,14 @@ public class DialogueManager : MonoBehaviour
 
     public void OptionYes() //swap item
     {
-        
+        GameManager gm = GameManager.getGame();
+        gm.lastNPC.setUsed();
     }
 
     public void OptionNo() //deny item
     {
-        
+        GameManager gm = GameManager.getGame();
+        gm.lastNPC = null;
     }
 
     public void DialogueSlideAway()

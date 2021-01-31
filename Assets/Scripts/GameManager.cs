@@ -16,8 +16,14 @@ public class GameManager : MonoBehaviour {
     Queue<GameObject> loadedFrames = new Queue<GameObject>();
 
     PlayerController playerController;
+    PlayerData playerData;
     public GameObject playerObject;
     public GameObject virtualCam;
+    public GameObject dialogue;
+
+    public NPC lastNPC;
+
+    RecordScores recordScores;
 
     static GameManager gameManager;
 
@@ -28,6 +34,7 @@ public class GameManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         gameManager = gameObject.GetComponent(typeof(GameManager)) as GameManager;
+        playerData = PlayerData.getPlayerData();
         nextSegmentStart = origin;
 
         instanciateSpawn();
@@ -35,6 +42,10 @@ public class GameManager : MonoBehaviour {
 
         levelSegments = Resources.LoadAll<GameObject>("Prefabs/LevelSegments") as GameObject[];
         Debug.Log("Loaded: " + levelSegments.Length  + "Segments");
+
+        recordScores = RecordScores.getRecordScores();
+        recordScores.setScore(score);
+        recordScores.setHighScore(highScore);
     }
 
     // Update is called once per frame
@@ -60,18 +71,22 @@ public class GameManager : MonoBehaviour {
 
     public void addScore() {
         score++;
+        recordScores.setScore(score);
+
         if (score > highScore) {
             highScore++;
+            recordScores.setHighScore(highScore);
         }
     }
 
     public void restart() {
         GameObject _player = playerObject;//playerController.gameObject;
-        CharacterController cc = playerObject.GetComponent(typeof(CharacterController)) as CharacterController;
-        cc.enabled = false;
+        //CharacterController cc = playerObject.GetComponent(typeof(CharacterController)) as CharacterController;
+        //cc.enabled = false;
         _player.transform.position = playerSpawn;
-        cc.enabled = true;
-        playerController.reset();
+        //cc.enabled = true;
+        playerData = PlayerData.getPlayerData();
+        playerData.reset();
 
         foreach (GameObject frame in loadedFrames) {
             Destroy(frame);
@@ -109,5 +124,10 @@ public class GameManager : MonoBehaviour {
             Destroy(removedFrame);
             //TODO: move the milky blackness
         }
+    }
+
+    public void enableDiologue(NPC npc) {
+        lastNPC = npc;
+        dialogue.SetActive(true);
     }
 }

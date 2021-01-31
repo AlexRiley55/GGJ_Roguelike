@@ -5,8 +5,8 @@ using UnityEngine;
 public class Key : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.name == "Player") {
-            PlayerController pc = PlayerController.getPlayer();
-            pc.keys++;
+            PlayerData pd = PlayerData.getPlayerData();
+            pd.keys++;
             Destroy(gameObject);
         }
     }

@@ -20,11 +20,13 @@ public class DoubleJump : Item { //TODO: this will break if more than 1 are appl
         name = "Double Jump";
     }
 
-    public override void Start(PlayerController pc) {
+    public override void Start(PlayerData pd) {
 
     }
 
-    public override void Update(PlayerController pc) {
+    public override void Update(PlayerData pd) {
+        /*
+
         GameObject player = pc.gameObject;
         CharacterController cc = player.GetComponent(typeof(CharacterController)) as CharacterController;
 
@@ -68,9 +70,11 @@ public class DoubleJump : Item { //TODO: this will break if more than 1 are appl
         if (Input.GetAxis("Vertical") < 0.1 && pc.isJumping) {
             hasZeroedVert = true;
         }
+
+        */
     }
 
-    public override void End(PlayerController pc) {
+    public override void End(PlayerData pd) {
 
     }
 }
