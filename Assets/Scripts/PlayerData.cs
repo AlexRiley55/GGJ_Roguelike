@@ -31,7 +31,6 @@ public class PlayerData : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         modifiedMaxHealth = maxHealth;
-        attachItem(new Glide());
     }
 
     // Update is called once per frame
@@ -68,6 +67,13 @@ public class PlayerData : MonoBehaviour {
         items.Remove(item);
     }
 
+    public void clearItems() {
+
+        while (items.Count > 0) {
+            detachItem(items[0]);
+        }
+    }
+
     public void checkHealth() {
         if (currentHealth > modifiedMaxHealth) {
             currentHealth = modifiedMaxHealth;
@@ -87,7 +93,7 @@ public class PlayerData : MonoBehaviour {
         maxHealth = 100f;
         currentHealth = 100f;
 
-        items = new List<Item>();
+        clearItems();
 
         Awake();
         Start();

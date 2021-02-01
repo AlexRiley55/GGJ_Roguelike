@@ -44,7 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b5874262df122498d5e2a8848dd756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highScore: 0
   score: 0
+  playerObject: {fileID: 0}
+  virtualCam: {fileID: 0}
+  dialogue: {fileID: 0}
+  lastNPC: {fileID: 0}
 --- !u!114 &3197086733181109279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,3 +62,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f8aea366082b04d9e50b7288d01a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killHeight: -10
+  active: 1
