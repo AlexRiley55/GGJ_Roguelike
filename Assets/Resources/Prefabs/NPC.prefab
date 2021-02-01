@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1142362929864836504}
   - component: {fileID: 1142362929864836505}
   - component: {fileID: 1142362929864836507}
-  - component: {fileID: 1142362929864836506}
   - component: {fileID: 3424796314110269337}
+  - component: {fileID: -3022798438719214376}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1142362929864836508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -43.916695, y: 2.57, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 1233769018269255957}
   - {fileID: 8203093226839091480}
@@ -100,19 +100,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   usedSprite: {fileID: 21300000, guid: 627f607e8a436504cbf659500fb4e576, type: 3}
---- !u!65 &1142362929864836506
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1142362929864836508}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4, y: 4, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3424796314110269337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +115,32 @@ MonoBehaviour:
   npcCharacters:
   - {fileID: 3197507062155069514}
   - {fileID: 8411804072352727275}
+--- !u!61 &-3022798438719214376
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142362929864836508}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 2}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 4, y: 4}
+  m_EdgeRadius: 0
 --- !u!1001 &758242190060036694
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -185,11 +198,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -336946906580776114, guid: ef43f677e389b8a479da71fbacc1603c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: -336946906580776114, guid: ef43f677e389b8a479da71fbacc1603c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: -44426886121511318, guid: ef43f677e389b8a479da71fbacc1603c, type: 3}
       propertyPath: m_IsActive
@@ -228,7 +241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7443894738302694852, guid: e795eb7a79886fc4bbe073c9287ba294, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -6489386942800753821, guid: e795eb7a79886fc4bbe073c9287ba294, type: 3}
       propertyPath: m_LocalPosition.x
@@ -276,11 +289,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6489386942800753821, guid: e795eb7a79886fc4bbe073c9287ba294, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: -6489386942800753821, guid: e795eb7a79886fc4bbe073c9287ba294, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: -2947472483569118729, guid: e795eb7a79886fc4bbe073c9287ba294, type: 3}
       propertyPath: m_Enabled
