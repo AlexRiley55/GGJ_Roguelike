@@ -19,6 +19,7 @@ public class NPC : MonoBehaviour {
             Debug.Log("enter");
             GameManager gm = GameManager.getGame();
             gm.enableDiologue(this);
+            used = true;
         }
     }
 

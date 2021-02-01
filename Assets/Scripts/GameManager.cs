@@ -133,6 +133,7 @@ public class GameManager : MonoBehaviour {
 
     public void enableDiologue(NPC npc) {
         lastNPC = npc;
+        dialogue.SetActive(false);
         dialogue.SetActive(true);
     }
 }

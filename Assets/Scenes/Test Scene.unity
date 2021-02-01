@@ -409,6 +409,10 @@ PrefabInstance:
       propertyPath: m_FontData.m_Alignment
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1995008612, guid: 5d22b3bfd33a30940b2021370c3eb315, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 342.97
+      objectReference: {fileID: 0}
     - target: {fileID: 1995008613, guid: 5d22b3bfd33a30940b2021370c3eb315, type: 3}
       propertyPath: highScoreText
       value: 
@@ -417,6 +421,10 @@ PrefabInstance:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 904330800}
+    - target: {fileID: 3593093695200421869, guid: 5d22b3bfd33a30940b2021370c3eb315, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3593093695279025066, guid: 5d22b3bfd33a30940b2021370c3eb315, type: 3}
       propertyPath: m_Name
       value: CanvasUI
