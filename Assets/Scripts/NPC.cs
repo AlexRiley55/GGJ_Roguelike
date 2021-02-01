@@ -16,14 +16,13 @@ public class NPC : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (Input.GetKeyDown("e") && collidingWithPlayer && !used) {
+            Debug.Log("enter");
             GameManager gm = GameManager.getGame();
             gm.enableDiologue(this);
         }
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("enter");
-
         if (other.gameObject.name == "Player") {
             collidingWithPlayer = true;
         }

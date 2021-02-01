@@ -16,10 +16,12 @@ public class RecordScores : MonoBehaviour {
         return recordScores;
     }
 
+    void Awake() {
+        recordScores = gameObject.GetComponent(typeof(RecordScores)) as RecordScores;
+    }
+    
     // Start is called before the first frame update
     void Start() {
-        recordScores = gameObject.GetComponent(typeof(RecordScores)) as RecordScores;
-
         highScoreText = highScoreObject.GetComponent(typeof(Text)) as Text;
         scoreText = scoreObject.GetComponent(typeof(Text)) as Text;
     }
