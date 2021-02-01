@@ -62,5 +62,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f8aea366082b04d9e50b7288d01a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killHeight: -10
+  killHeight: -25
   active: 1
